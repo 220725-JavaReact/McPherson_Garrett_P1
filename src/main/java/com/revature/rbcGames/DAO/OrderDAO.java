@@ -50,8 +50,33 @@ public class OrderDAO implements DAO<Order> {
 
 	@Override
 	public ArrayList<Order> GetAllInstances() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Order> orders = new ArrayList<Order>();
+		try(Connection con = ConnectionFactory.getInstance().getConnection()){
+			String query = "select orders.id, orders.total, st.id as sid, st.\"name\"  as sname, st.address,\r\n"
+					+ "c.id as cid, c.\"name\" , c.address, c.email \r\n"
+					+ "from orders\r\n"
+					+ "join storefront st on orders.store = st.id\r\n"
+					+ "join customers c on orders.customer = c.id ";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			
+			//pstmt.setInt(1, customer.getId());
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Order order = new Order();
+				StoreFront storeFront = new StoreFront();
+				Customer customer = new Customer();
+				order.setId(rs.getInt("id"));
+				order.setTotal(rs.getDouble("total"));
+				storeFront.setName(rs.getString("name"));
+				storeFront.setAddress(rs.getString("address"));
+				order.setStoreFront(storeFront);
+				orders.add(order);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return orders;
+		
 	}
 	
 	public ArrayList<Order> GetAllCustomerStoreInstances(Customer customer, StoreFront store){

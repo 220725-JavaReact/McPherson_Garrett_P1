@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.revature.rbcGames.models.LineItem;
 import com.revature.rbcGames.models.Product;
+import com.revature.rbcGames.models.StoreFront;
 import com.revature.rbcGames.util.ConnectionFactory;
 
 /**
@@ -33,7 +34,42 @@ public class LineItemDAO implements DAO<LineItem> {
 		// TODO Auto-generated method stub
 		ArrayList<LineItem> allItems = new ArrayList<>();
 		
-		return null;
+		try (Connection con = ConnectionFactory.getInstance().getConnection()){
+			String query = "select li.id, products.id as pid ,products.name, products.price, li.quantity, products.description,\r\n"
+					+ "storefront.id as sid, storefront.\"name\" as sname, storefront.address \r\n"
+					+ "from line_items li \r\n"
+					+ "inner join products on li.product=products.id \r\n"
+					+ "inner join storefront on li.store=storefront.id ";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				LineItem lineItem = new LineItem();
+				Product product = new Product();
+				StoreFront storeFront = new StoreFront();
+				lineItem.setId(rs.getInt("id"));
+				product.setId(rs.getInt("pid"));
+				product.setName(rs.getString("name"));
+				product.setPrice(rs.getDouble("price"));
+				lineItem.setQuantity(rs.getInt("quantity"));
+				product.setDescription(rs.getString("description"));
+				storeFront.setId(rs.getInt("sid"));
+				storeFront.setName(rs.getString("sname"));
+				storeFront.setAddress(rs.getString("address"));
+				
+				lineItem.setProduct(product);
+				lineItem.setStoreFront(storeFront);
+				
+				allItems.add(lineItem);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return allItems;
 	}
 	
 	public ArrayList<LineItem> GetAllInstancesFromStoreFront(int storeId) {
@@ -90,7 +126,7 @@ public class LineItemDAO implements DAO<LineItem> {
 		return null;
 	}
 	
-	public ArrayList<LineItem> UpdateExistingInstances(ArrayList<LineItem> instances){
+	/*public ArrayList<LineItem> UpdateExistingInstances(ArrayList<LineItem> instances){
 		
 		try (Connection con = ConnectionFactory.getInstance().getConnection()){
 			String query = "";
@@ -115,7 +151,7 @@ public class LineItemDAO implements DAO<LineItem> {
 		}
 		
 		return null;
-	}
+	}*/
 
 	@Override
 	public boolean RemoveInstance(LineItem instance) {

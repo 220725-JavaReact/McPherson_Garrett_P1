@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <style>
+            body {
+                text-align: center;
+                background-color: white;
+                border-color: black;
+                border-radius: 10%;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+            p {
+                background-color: rgba(0, 0, 0,.05);
+                border-radius: 10%;
+            }
+        </style>
+    </head>
+    <body>
+        <p style="color: red;">Invalid Input</p>
+        <h1>Register User</h1>
+        <form method="post" action = "/McPherson_Garrett_P1/Register"> 
+            <p>Name</p>
+            <input type="text" name="name">
+            <p>Address</p>
+            <input type="text" name="address">
+            <p>Email</p>
+            <input type="email" name="email">
+            <p>Username (unique)</p>
+            <input type="text" name="username">
+            <p>Password</p>
+            <input type="password" name="password">
+            <br>
+            <input type="submit" value="Register">
+        </form>
+    </body>
+
+    <body>
+        
+        <h1>Login</h1>
+        <form method="post" action = "/McPherson_Garrett_P1/Register"> 
+            <p>Username (unique)</p>
+            <input type="text" name="username">
+            <p>Password</p>
+            <input type="password" name="password">
+            <br>
+            <input type="submit" value="Login">
+        </form>
+    </body>
+</html>

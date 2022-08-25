@@ -67,9 +67,30 @@ public class CustomerDAO implements DAO<Customer>{
 	}*/
 	@Override
 	public ArrayList<Customer> GetAllInstances() {
-		// TODO Auto-generated method stub
+		ArrayList<Customer> customers = new ArrayList<>();
+		try(Connection con = ConnectionFactory.getInstance().getConnection()){
+			String query = "select * from customers\r\n";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Customer customer = new Customer();
+				customer.setId(rs.getInt("id"));
+				customer.setName(rs.getString("name"));
+				customer.setAddress(rs.getString("address"));
+				customer.setEmail(rs.getString("email"));
+				customer.setUserName(rs.getString("username"));
+				customer.setPassword(rs.getInt("password"));
+				customer.setAdmin(rs.getBoolean("is_admin"));
+				
+				customers.add(customer);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return customers;
 
-		return null;
 	}
 
 	@Override
