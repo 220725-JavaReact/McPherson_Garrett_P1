@@ -13,7 +13,7 @@ import com.revature.rbcGames.util.ConnectionFactory;
  * @author Garrett
  * get instances for StoreFronts and adds them to the temp storage arraylist. NOT TESTED
  */
-public class StoreDAO implements DAO<StoreFront> {
+public class StoreFrontDAO implements DAO<StoreFront> {
 
 	@Override
 	public StoreFront AddInstance(StoreFront newInstance) {

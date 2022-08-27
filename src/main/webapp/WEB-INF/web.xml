@@ -26,4 +26,21 @@
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/Register</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MainMenuServlet</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Menus.MainMenuServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MainMenuServlet</servlet-name>
+    <url-pattern>/Menu</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>StoreFrontServlet</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Menus.StoreFrontServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StoreFrontServlet</servlet-name>
+    <url-pattern>/Stores</url-pattern>
+  </servlet-mapping>
 </web-app>

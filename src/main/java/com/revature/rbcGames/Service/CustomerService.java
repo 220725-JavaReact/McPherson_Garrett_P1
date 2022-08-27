@@ -19,6 +19,7 @@ public class CustomerService {
 		Customer c = customerDAO.AddInstance(customer);
 		if(customers != null) {
 			customers = null;
+			customers = customerDAO.GetAllInstances();
 		}
 		return c;
 	}
