@@ -9,15 +9,15 @@ import java.util.LinkedList;
 
 import com.revature.rbcGames.models.Order;
 import com.revature.rbcGames.models.Product;
-import com.revature.rbcGames.models.PurchasedItems;
+import com.revature.rbcGames.models.PurchasedItem;
 import com.revature.rbcGames.util.ConnectionFactory;
 
-public class PurchasedItemsDAO implements DAO<PurchasedItems> {
+public class PurchasedItemsDAO implements DAO<PurchasedItem> {
 
 	@Override
-	public PurchasedItems AddInstance(PurchasedItems newInstance) {
+	public PurchasedItem AddInstance(PurchasedItem newInstance) {
 		// TODO Auto-generated method stub
-		PurchasedItems purchasedItem = null;
+		PurchasedItem purchasedItem = null;
 		try(Connection con = ConnectionFactory.getInstance().getConnection()){
 			String query = "insert into purchased_items (purchase, product, quantity)\r\n"
 					+ "values(?,?,?)";
@@ -34,8 +34,8 @@ public class PurchasedItemsDAO implements DAO<PurchasedItems> {
 		return purchasedItem;
 	}
 	
-	public LinkedList<PurchasedItems> AddInstances(LinkedList<PurchasedItems> newInstances, Order orderInstance){
-		LinkedList<PurchasedItems> purchase = null;
+	public LinkedList<PurchasedItem> AddInstances(LinkedList<PurchasedItem> newInstances, Order orderInstance){
+		LinkedList<PurchasedItem> purchase = null;
 		try(Connection con = ConnectionFactory.getInstance().getConnection()){
 			String query = "insert into purchased_items (purchase, product, quantity)\r\n";
 			
@@ -69,8 +69,8 @@ public class PurchasedItemsDAO implements DAO<PurchasedItems> {
 		return null;
 	}*/
 	
-	public ArrayList<PurchasedItems> GetInstanceByOrderId(Order order){
-		ArrayList<PurchasedItems> purchases = new ArrayList<>();
+	public ArrayList<PurchasedItem> GetInstanceByOrderId(Order order){
+		ArrayList<PurchasedItem> purchases = new ArrayList<>();
 		try(Connection con = ConnectionFactory.getInstance().getConnection()){
 			String query = "select products.\"name\", products.description, products.price, purchased_items.quantity \r\n"
 					+ "from purchased_items\r\n"
@@ -82,7 +82,7 @@ public class PurchasedItemsDAO implements DAO<PurchasedItems> {
 			ResultSet rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				PurchasedItems purchasedItem = new PurchasedItems();
+				PurchasedItem purchasedItem = new PurchasedItem();
 				Product product = new Product();
 				product.setName(rs.getString("name"));
 				product.setDescription(rs.getString("description"));
@@ -101,19 +101,19 @@ public class PurchasedItemsDAO implements DAO<PurchasedItems> {
 	}
 
 	@Override
-	public ArrayList<PurchasedItems> GetAllInstances() {
+	public ArrayList<PurchasedItem> GetAllInstances() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public PurchasedItems UpdateInstance(PurchasedItems instance) {
+	public PurchasedItem UpdateInstance(PurchasedItem instance) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean RemoveInstance(PurchasedItems instance) {
+	public boolean RemoveInstance(PurchasedItem instance) {
 		// TODO Auto-generated method stub
 		return false;
 	}

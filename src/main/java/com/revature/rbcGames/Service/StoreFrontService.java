@@ -9,6 +9,7 @@ import com.revature.rbcGames.models.StoreFront;
 public class StoreFrontService {
 	private static DAO<StoreFront> storeFrontDAO = new StoreFrontDAO();
 	private static ArrayList<StoreFront> storeFronts = null;
+	private static StoreFront cachedStore = null;
 	
 	public StoreFront AddStoreFront(StoreFront StoreFront) {
 		StoreFront s = storeFrontDAO.AddInstance(StoreFront);
@@ -27,5 +28,19 @@ public class StoreFrontService {
 		}
 		
 		return storeFronts;
+	}
+	
+	public StoreFront GetAStoreFront(String sId) {
+		int id = Integer.parseInt(sId);
+		
+		if(cachedStore == null || cachedStore.getId() != id) {
+			for(StoreFront storeFront : GetAllStoreFronts()) {
+				if(storeFront.getId() == id) {
+					cachedStore = storeFront;
+					return cachedStore;
+				}
+			}
+		}
+		return cachedStore;
 	}
 }

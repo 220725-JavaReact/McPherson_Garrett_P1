@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.rbcGames.Service.CustomerService;
 import com.revature.rbcGames.models.Customer;
 import com.revature.rbcGames.util.HtmlFormater;
 
 public class RegisterServlet extends HttpServlet {
+	private static CustomerService customerService = new CustomerService();
 	private String body = "<h1>Register User</h1>\r\n"
 			+ "        <form method=\"post\" action = \"/McPherson_Garrett_P1/Register\"> \r\n"
 			+ "            <p>Name</p>\r\n"
@@ -26,10 +28,11 @@ public class RegisterServlet extends HttpServlet {
 			+ "            <br>\r\n"
 			+ "            <input type=\"submit\" value=\"Register\">\r\n"
 			+ "        </form>";
+	private String invalid = "<p style=\"color: red;\">Invalid Input</p>";
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-		resp.getWriter().write(HtmlFormater.head + body + HtmlFormater.tail);
+		resp.getWriter().write(HtmlFormater.format("Register", body, true));
 	}
 	
 	@Override
@@ -44,9 +47,9 @@ public class RegisterServlet extends HttpServlet {
 				|| customer.getUserName() == "" || myPassword == "") {
 			//redirect back
 			System.out.println("bad login");
-			resp.getWriter().write(HtmlFormater.head + "<p style=\"color: red;\">Invalid Input</p>" + body + HtmlFormater.tail);
+			resp.getWriter().write(HtmlFormater.format("Register",invalid + body, true));
 		} else {
-			//add to database
+			customerService.AddCustomer(customer, myPassword);
 			resp.sendRedirect("/McPherson_Garrett_P1/Login");
 		}
 		

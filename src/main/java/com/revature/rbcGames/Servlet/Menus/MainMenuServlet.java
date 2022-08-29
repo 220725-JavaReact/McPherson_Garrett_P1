@@ -25,7 +25,7 @@ public class MainMenuServlet extends HttpServlet {
 		body += "<li> <a href=\"/McPherson_Garrett_P1/Stores\">Start your order</a> </li><br>";
 		body += "<li> <a href=\"/McPherson_Garrett_P1/Login\">Update your profile</a> </li>";
 		body += "</ul>";
-		resp.getWriter().write(HtmlFormater.head + body + HtmlFormater.tail);
+		resp.getWriter().write(HtmlFormater.format("Menu", body));
 		
 		
 	}

@@ -1,7 +1,8 @@
 package com.revature.rbcGames.models;
 
-public class PurchasedItems {
+public class PurchasedItem {
 	private int id;
+	private double itemCost; //amount paid per product
 	private Order order;
 	private Product product;
 	private int quanity;
@@ -9,7 +10,7 @@ public class PurchasedItems {
 	
 	
 	
-	public PurchasedItems() {
+	public PurchasedItem() {
 		super();
 		this.quanity = 1;
 		
@@ -17,7 +18,7 @@ public class PurchasedItems {
 
 
 
-	public PurchasedItems(int id, Order order, Product product, int quanity) {
+	public PurchasedItem(int id, Order order, Product product, int quanity) {
 		super();
 		this.id = id;
 		this.order = order;
@@ -34,6 +35,22 @@ public class PurchasedItems {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+
+	public double getItemCost() {
+		return itemCost;
+	}
+	
+	public double getItemCostTotal() {
+		return itemCost*quanity;
+	}
+
+
+
+	public void setItemCost(double itemCost) {
+		this.itemCost = itemCost;
+	}
+
 
 
 	public Order getOrder() {

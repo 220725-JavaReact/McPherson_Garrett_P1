@@ -34,11 +34,14 @@ public class CustomerService {
 	
 	public Customer GetCustomerByLogin(Customer customer, String password) {
 		customer.setPassword(setToHash(password));
+
 		ArrayList<Customer> customers = GetAllCustomers();
-		//Customer c = null;
+
 		for(Customer c : customers) {
-			if(c.getUserName() == customer.getUserName()) {
+			if(c.getUserName().equals(c.getUserName())) {
+				
 				if(c.getPassword() == customer.getPassword()) {
+					
 					return c;
 				}
 				break;

@@ -35,12 +35,28 @@
     <servlet-name>MainMenuServlet</servlet-name>
     <url-pattern>/Menu</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>StoreFrontServlet</servlet-name>
-    <servlet-class>com.revature.rbcGames.Servlet.Menus.StoreFrontServlet</servlet-class>
+    <servlet-class>com.revature.rbcGames.Servlet.Ordering.StoreFrontServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>StoreFrontServlet</servlet-name>
     <url-pattern>/Stores</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>StoreFrontOrderServlet</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Ordering.StoreFrontOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StoreFrontOrderServlet</servlet-name>
+    <url-pattern>/Order</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Menus.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
 </web-app>

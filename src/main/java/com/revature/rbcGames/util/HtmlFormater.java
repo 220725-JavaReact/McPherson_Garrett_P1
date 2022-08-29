@@ -1,7 +1,7 @@
 package com.revature.rbcGames.util;
 
 public class HtmlFormater {
-	static public String head = "<html>\r\n"
+	public static String head = "<html>\r\n"
 			+ "        <head>\r\n"
 			+ "        <style>\r\n"
 			+ "            body {\r\n"
@@ -23,6 +23,8 @@ public class HtmlFormater {
 			+ "            }\r\n"
 			+ "\r\n"
 			+ "        </style>\r\n"
+			+ "		<title>";
+	public static String head2=		"</title>"
 			+ "    </head>\r\n"
 			+ "    <header style=\"color: white;\">\r\n"
 			+ "        <img src=\"images/logo.png\" alt=\"company logo\" width=\"100px\" height=\"100px\">\r\n"
@@ -31,6 +33,22 @@ public class HtmlFormater {
 			+ "    </header>";
 	
 	static public String tail ="    </body>\r\n"
+			+ "    <footer>\r\n"
+			+ "        <form method=\"post\" action = \"/McPherson_Garrett_P1/Logout\"> \r\n"
+			+ "            <input type=\"submit\" value=\"Logout\">\r\n"
+			+ "        </form>\r\n"
+			+ "    </footer>"
 			+ "</html>";
+	static public String tailNoLogout = "    </body>\r\n"
+			+ "    <footer>\r\n"
+			+ "    </footer>"
+			+ "</html>";
+	
+	public static String format(String title, String body) {
+		return head + title + head2 + body + tail;
+	}
+	public static String format(String title, String body, Boolean haveLogin) {
+		return head + title + head2 + body + tailNoLogout;
+	}
 
 }
