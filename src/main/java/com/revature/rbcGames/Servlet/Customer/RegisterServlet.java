@@ -32,7 +32,7 @@ public class RegisterServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
-		resp.getWriter().write(HtmlFormater.format("Register", body, true));
+		resp.getWriter().write(HtmlFormater.format("Register", body));
 	}
 	
 	@Override
@@ -47,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
 				|| customer.getUserName() == "" || myPassword == "") {
 			//redirect back
 			System.out.println("bad login");
-			resp.getWriter().write(HtmlFormater.format("Register",invalid + body, true));
+			resp.getWriter().write(HtmlFormater.format("Register",invalid + body));
 		} else {
 			customerService.AddCustomer(customer, myPassword);
 			resp.sendRedirect("/McPherson_Garrett_P1/Login");

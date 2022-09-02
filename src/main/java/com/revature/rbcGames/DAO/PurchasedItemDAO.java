@@ -12,7 +12,7 @@ import com.revature.rbcGames.models.Product;
 import com.revature.rbcGames.models.PurchasedItem;
 import com.revature.rbcGames.util.ConnectionFactory;
 
-public class PurchasedItemsDAO implements DAO<PurchasedItem> {
+public class PurchasedItemDAO implements DAO<PurchasedItem> {
 
 	@Override
 	public PurchasedItem AddInstance(PurchasedItem newInstance) {
@@ -20,11 +20,12 @@ public class PurchasedItemsDAO implements DAO<PurchasedItem> {
 		PurchasedItem purchasedItem = null;
 		try(Connection con = ConnectionFactory.getInstance().getConnection()){
 			String query = "insert into purchased_items (purchase, product, quantity)\r\n"
-					+ "values(?,?,?)";
+					+ "values(?,?,?,?)";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, newInstance.getOrder().getId());
 			pstmt.setInt(2, newInstance.getProduct().getId());
 			pstmt.setInt(3, newInstance.getQuanity());
+			pstmt.setDouble(3, newInstance.getItemCostTotal());
 			pstmt.execute();
 			
 			purchasedItem = newInstance;
@@ -37,10 +38,11 @@ public class PurchasedItemsDAO implements DAO<PurchasedItem> {
 	public LinkedList<PurchasedItem> AddInstances(LinkedList<PurchasedItem> newInstances, Order orderInstance){
 		LinkedList<PurchasedItem> purchase = null;
 		try(Connection con = ConnectionFactory.getInstance().getConnection()){
-			String query = "insert into purchased_items (purchase, product, quantity)\r\n";
+			String query = "insert into purchased_items (purchase, product, quantity, cost)\r\n"
+					+ "values";
 			
 			for(int i = 0; i < newInstances.size(); i++) {
-				query += "values(?,?,?)";
+				query += "(?,?,?,?)";
 				if(i != newInstances.size()-1) {
 					query+= ",\n";
 				}
@@ -49,9 +51,10 @@ public class PurchasedItemsDAO implements DAO<PurchasedItem> {
 			PreparedStatement pstmt = con.prepareStatement(query);
 			for(int i = 0; i < newInstances.size(); i++) {
 				System.out.println(orderInstance.getId() + " " + newInstances.get(i).getProduct().getId() + " " + newInstances.get(i).getQuanity());
-				pstmt.setInt(i*3 +1, orderInstance.getId());
-				pstmt.setInt(i*3 + 2, newInstances.get(i).getProduct().getId());
-				pstmt.setInt(i*3 + 3, newInstances.get(i).getQuanity());
+				pstmt.setInt(i*4 +1, orderInstance.getId());
+				pstmt.setInt(i*4 + 2, newInstances.get(i).getProduct().getId());
+				pstmt.setInt(i*4 + 3, newInstances.get(i).getQuanity());
+				pstmt.setDouble(i*4 + 4, newInstances.get(i).getItemCost());
 			}
 			pstmt.execute();
 			purchase = newInstances;

@@ -51,6 +51,14 @@
     <servlet-name>StoreFrontOrderServlet</servlet-name>
     <url-pattern>/Order</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>CheckoutServlet</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Ordering.CheckoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckoutServlet</servlet-name>
+    <url-pattern>/Checkout</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>com.revature.rbcGames.Servlet.Menus.LogoutServlet</servlet-class>
@@ -58,5 +66,29 @@
   <servlet-mapping>
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminOptions</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Admin.AdminOptionsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminOptions</servlet-name>
+    <url-pattern>/Admin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Restock</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Admin.RestockServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Restock</servlet-name>
+    <url-pattern>/Restock</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Fulfill</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Admin.FulfillServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Fulfill</servlet-name>
+    <url-pattern>/Fulfill</url-pattern>
   </servlet-mapping>
 </web-app>

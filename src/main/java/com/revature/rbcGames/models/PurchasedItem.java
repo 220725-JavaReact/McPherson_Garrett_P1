@@ -44,6 +44,10 @@ public class PurchasedItem {
 	public double getItemCostTotal() {
 		return itemCost*quanity;
 	}
+	
+	public String getItemCostTotalString() {
+		return "$"+ String.format("%.2f", itemCost*quanity);
+	}
 
 
 

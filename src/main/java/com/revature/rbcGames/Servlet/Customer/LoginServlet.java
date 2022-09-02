@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 		
 
 		
-		resp.getWriter().write(HtmlFormater.format("Login" , body, true));
+		resp.getWriter().write(HtmlFormater.format("Login" , body));
 	}
 
 	@Override
@@ -47,6 +47,6 @@ public class LoginServlet extends HttpServlet {
 			resp.sendRedirect("/McPherson_Garrett_P1/Menu");
 			
 		}
-		resp.getWriter().write(HtmlFormater.format("Login" , invalid + body, true ));
+		resp.getWriter().write(HtmlFormater.format("Login" , invalid + body));
 	}
 }

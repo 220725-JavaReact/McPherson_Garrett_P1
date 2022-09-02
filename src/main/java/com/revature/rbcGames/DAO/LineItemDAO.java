@@ -126,8 +126,8 @@ public class LineItemDAO implements DAO<LineItem> {
 		return null;
 	}
 	
-	/*public ArrayList<LineItem> UpdateExistingInstances(ArrayList<LineItem> instances){
-		
+	public ArrayList<LineItem> UpdateExistingInstances(ArrayList<LineItem> instances){
+		System.out.println(instances.toString());
 		try (Connection con = ConnectionFactory.getInstance().getConnection()){
 			String query = "";
 			for(LineItem instance : instances) {
@@ -151,7 +151,7 @@ public class LineItemDAO implements DAO<LineItem> {
 		}
 		
 		return null;
-	}*/
+	}
 
 	@Override
 	public boolean RemoveInstance(LineItem instance) {

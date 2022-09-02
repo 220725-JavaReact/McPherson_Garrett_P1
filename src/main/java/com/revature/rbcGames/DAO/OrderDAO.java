@@ -18,23 +18,23 @@ public class OrderDAO implements DAO<Order> {
 		Order order = null;
 		try (Connection con = ConnectionFactory.getInstance().getConnection()){
 			String query = "insert into orders (total, store, customer)\r\n"
-					+ "values (?,?,?);"
-					+ "select currval('orders_id_seq') ";
+					+ "values (?,?,?)"
+					+ "returning id";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			
 			pstmt.setDouble(1, newInstance.getTotal());
 			pstmt.setInt(2, newInstance.getStoreFront().getId());
 			pstmt.setInt(3, newInstance.getCustomer().getId());
-			pstmt.execute();
+			/*pstmt.execute();
 			query = "select max(id)\r\n"
 					+ "from orders\r\n"
 					+ "where customer = ?";
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, newInstance.getCustomer().getId());
+			pstmt.setInt(1, newInstance.getCustomer().getId());*/
 			ResultSet rs = pstmt.executeQuery();
 			
 			rs.next();
-			newInstance.setId(rs.getInt("max"));
+			newInstance.setId(rs.getInt("id"));
 			order = newInstance; //hoping this works*/
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -126,6 +126,7 @@ public class OrderDAO implements DAO<Order> {
 				StoreFront newStore = new StoreFront();
 				order.setId(rs.getInt("id"));
 				order.setTotal(rs.getDouble("total"));
+				order.setReady(rs.getBoolean("ready"));
 				newStore.setName(rs.getString("name"));
 				newStore.setAddress(rs.getString("address"));
 				order.setStoreFront(newStore);

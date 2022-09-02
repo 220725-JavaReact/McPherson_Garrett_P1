@@ -34,5 +34,13 @@ public class LineItemService {
 		}
 		return lineItems;
 	}
+	
+	public ArrayList<LineItem> UpdateLineItems(ArrayList<LineItem> lineItems){
+		System.out.println("Updating lineItems " + lineItems.toString());
+		ArrayList<LineItem> items = ((LineItemDAO) lineItemDAO).UpdateExistingInstances(lineItems);
+		lineItems = null;
+		
+		return GetAllLineItemsAll();
+	}
 
 }

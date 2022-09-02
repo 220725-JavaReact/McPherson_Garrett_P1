@@ -27,6 +27,8 @@ public class HtmlFormater {
 	public static String head2=		"</title>"
 			+ "    </head>\r\n"
 			+ "    <header style=\"color: white;\">\r\n"
+			+ "<p style=\"text-align: right;\">";
+	public static String head3= "</p>"
 			+ "        <img src=\"images/logo.png\" alt=\"company logo\" width=\"100px\" height=\"100px\">\r\n"
 			+ "        <h1>RBC Games</h1>\r\n"
 			+ "        <p ><i>Rediscover Retro</i></p>"
@@ -44,11 +46,11 @@ public class HtmlFormater {
 			+ "    </footer>"
 			+ "</html>";
 	
-	public static String format(String title, String body) {
-		return head + title + head2 + body + tail;
+	public static String format(String title, String user, String body) {
+		return head + title + head2 +user +head3+ body + tail;
 	}
-	public static String format(String title, String body, Boolean haveLogin) {
-		return head + title + head2 + body + tailNoLogout;
+	public static String format(String title, String body) {
+		return head + title + head2 +head3 + body + tailNoLogout;
 	}
 
 }

@@ -10,6 +10,7 @@ public class Order {
 	private Double total = 0.0;
 	private StoreFront storeFront;
 	private Customer customer;
+	private Boolean ready = false;
 	//to-do update model with proper constructors, set get, and override methods
 	
 	public Order() {
@@ -23,6 +24,7 @@ public class Order {
 		this.total = total;
 		this.storeFront = storeFront;
 		this.customer = customer;
+		this.ready = false;
 	}
 
 
@@ -65,10 +67,22 @@ public class Order {
 		this.customer = customer;
 	}
 
+	public Boolean getReady() {
+		return ready;
+	}
+
+	public void setReady(Boolean ready) {
+		this.ready = ready;
+	}
+
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", total=" + total + ", storeFront=" + storeFront + ", customer=" + customer + "]";
+		return "Order [id=" + id + ", total=" + total + ", storeFront=" + storeFront + ", customer=" + customer
+				+ ", ready=" + ready + "]";
 	}
+	
+	
+
 
 
 	
