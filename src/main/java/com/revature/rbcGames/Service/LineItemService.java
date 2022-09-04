@@ -10,8 +10,21 @@ import com.revature.rbcGames.models.StoreFront;
 public class LineItemService {
 	private static DAO<LineItem> lineItemDAO = new LineItemDAO();
 	private static ArrayList<LineItem> lineItems = null;
-	//add line Item
 	
+	public LineItemService() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public LineItemService(LineItemDAO lineItemDAO, ArrayList<LineItem> lineItems) {
+		super();
+		LineItemService.lineItemDAO = lineItemDAO;
+		LineItemService.lineItems = lineItems;
+	}
+	
+	//add line Item
+		
+
 	public ArrayList<LineItem> GetAllLineItemsFromStoreFront(StoreFront storeFront){
 		ArrayList<LineItem> l = new ArrayList<>();
 		
@@ -36,8 +49,11 @@ public class LineItemService {
 	}
 	
 	public ArrayList<LineItem> UpdateLineItems(ArrayList<LineItem> lineItems){
-		System.out.println("Updating lineItems " + lineItems.toString());
+
 		ArrayList<LineItem> items = ((LineItemDAO) lineItemDAO).UpdateExistingInstances(lineItems);
+		if(items == null) {
+			return items;
+		}
 		lineItems = null;
 		
 		return GetAllLineItemsAll();

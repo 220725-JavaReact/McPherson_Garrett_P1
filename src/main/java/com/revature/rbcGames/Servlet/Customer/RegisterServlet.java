@@ -7,12 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.rbcGames.Service.CustomerService;
 import com.revature.rbcGames.models.Customer;
 import com.revature.rbcGames.util.HtmlFormater;
 
 public class RegisterServlet extends HttpServlet {
 	private static CustomerService customerService = new CustomerService();
+	private static Logger logLogger = LogManager.getLogger(CustomerService.class.getName());
 	private String body = "<h1>Register User</h1>\r\n"
 			+ "        <form method=\"post\" action = \"/McPherson_Garrett_P1/Register\"> \r\n"
 			+ "            <p>Name</p>\r\n"
@@ -46,7 +50,7 @@ public class RegisterServlet extends HttpServlet {
 		if(customer.getName() == "" || customer.getAddress()== "" || customer.getEmail() == "" 
 				|| customer.getUserName() == "" || myPassword == "") {
 			//redirect back
-			System.out.println("bad login");
+			logLogger.error("missing creditials in register");
 			resp.getWriter().write(HtmlFormater.format("Register",invalid + body));
 		} else {
 			customerService.AddCustomer(customer, myPassword);

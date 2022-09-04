@@ -98,12 +98,15 @@ public class CustomerDAO implements DAO<Customer>{
 		Customer customer = null;;
 		try(Connection con = ConnectionFactory.getInstance().getConnection()){
 			String query = "update customers \r\n"
-					+ "set \"name\" = ?, address = ?, email = ?\r\n"
-					+ "where id=1;";
+					+ "set \"name\" = ?, address = ?, email = ?, password = ?, is_admin = ?\r\n"
+					+ "where id=?;";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setString(1, instance.getName());
 			pstmt.setString(2, instance.getAddress());
 			pstmt.setString(3, instance.getEmail());
+			pstmt.setInt(4, instance.getPassword());
+			pstmt.setBoolean(5, instance.isAdmin());
+			pstmt.setInt(6, instance.getId());
 			
 			pstmt.execute();
 			customer = instance;

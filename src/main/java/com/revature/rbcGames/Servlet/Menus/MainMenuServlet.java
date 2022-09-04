@@ -31,8 +31,8 @@ public class MainMenuServlet extends HttpServlet {
 		}
 		//go to redirect if the user is not logged in
 		body += "<li> <a href=\"/McPherson_Garrett_P1/Stores\">Start your order</a> </li><br>";
-		body += "<li> <a href=\"/McPherson_Garrett_P1/Stores\">Review Previous Orders</a> </li><br>";
-		body += "<li> <a href=\"/McPherson_Garrett_P1/Login\">Update your profile</a> </li>";
+		body += "<li> <a href=\"/McPherson_Garrett_P1/History\">Review Previous Orders</a> </li><br>";
+		body += "<li> <a href=\"/McPherson_Garrett_P1/Update\">Update your profile</a> </li>";
 		body += "</ul>";
 		resp.getWriter().write(HtmlFormater.format("Menu", customer.getUserName(), body));
 		

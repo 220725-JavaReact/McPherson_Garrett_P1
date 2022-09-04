@@ -25,6 +25,14 @@
   <servlet-mapping>
     <servlet-name>RegisterServlet</servlet-name>
     <url-pattern>/Register</url-pattern>
+  </servlet-mapping>  
+  <servlet>
+    <servlet-name>UpdateServlet</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Customer.UpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateServlet</servlet-name>
+    <url-pattern>/Update</url-pattern>
   </servlet-mapping>
   
   <servlet>
@@ -90,5 +98,13 @@
   <servlet-mapping>
     <servlet-name>Fulfill</servlet-name>
     <url-pattern>/Fulfill</url-pattern>
+  </servlet-mapping>  
+  <servlet>
+    <servlet-name>History</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Customer.HistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>History</servlet-name>
+    <url-pattern>/History</url-pattern>
   </servlet-mapping>
 </web-app>

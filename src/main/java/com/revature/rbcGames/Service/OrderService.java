@@ -15,6 +15,19 @@ public class OrderService {
 	private static DAO<PurchasedItem> purchasedItemDAO = new PurchasedItemDAO();
 	private static ArrayList<Order> orders = null;
 	
+	
+	
+	public OrderService() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public OrderService(OrderDAO orderDAO, PurchasedItemDAO purchasedItemDAO, ArrayList<Order> orders) {
+		OrderService.orderDAO = orderDAO;
+		OrderService.purchasedItemDAO = purchasedItemDAO;
+		OrderService.orders = orders;
+	}
+
 	public LinkedList<PurchasedItem> AddAnOrder(LinkedList<PurchasedItem> purchasedItems){
 		Order order = purchasedItems.get(0).getOrder();
 		order = orderDAO.AddInstance(order);
@@ -36,6 +49,7 @@ public class OrderService {
 	public ArrayList<Order> GetAllUnFulfilledOrders(){
 		ArrayList<Order> o = new ArrayList<>();
 		ArrayList<Order> c = GetAllOrders();
+		
 		for(Order order : c) {
 			if(!order.getReady()) {
 				o.add(order);
@@ -48,7 +62,7 @@ public class OrderService {
 		ArrayList<Order> o = new ArrayList<>();
 		ArrayList<Order> c = GetAllOrders();
 		for(Order order : c) {
-			if(order.getCustomer().equals(customer)) {
+			if(order.getCustomer().getId()== customer.getId()) {
 				o.add(order);
 			}
 		}
@@ -58,5 +72,9 @@ public class OrderService {
 		
 		return ((PurchasedItemDAO) purchasedItemDAO).GetInstanceByOrderId(order);
 		
+	}
+	
+	public ArrayList<Order> UpdateOrders(ArrayList<Order> orders){
+		return ((OrderDAO) orderDAO).UpdateInstances(orders);
 	}
 }

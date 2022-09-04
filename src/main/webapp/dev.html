@@ -32,8 +32,14 @@
             <input type="email" name="email">
             <p>Username (unique)</p>
             <input type="text" name="username">
-            <p>Password</p>
-            <input type="password" name="password">
+            <p>Old Password</p>
+            <input type="password" name="old-password">
+            <br>
+            <p>New Password</p>
+            <input type="password" name="new-password">
+            <br>
+            <p>New Password (repeat)</p>
+            <input type="password" name="new-password2">
             <br>
             <input type="submit" value="Register">
         </form>
@@ -65,4 +71,10 @@
         
     </ul>
     <select id="isTitles" name="isTitles" ></select>
+    <form method="post" action = "/McPherson_Garrett_P1/Fulfill" style="text-align: left;"> 
+        
+        <input type="checkbox" name="name" value="Fulfill" >
+        <label for="name" >label</label>
+        <input type="submit" value="Confirm fulfillment">
+    </form>
 </html>

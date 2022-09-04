@@ -23,7 +23,8 @@ public class StoreFrontServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
 		
 		
-		String body= "<form method=\"post\" action = \"/McPherson_Garrett_P1/Stores\" style=\"text-align: left; font-size: large;\">";
+		String body= "<a href=\"/McPherson_Garrett_P1/Menu\">Main Menu</a></li><br>" +
+				"<form method=\"post\" action = \"/McPherson_Garrett_P1/Stores\" style=\"text-align: left; font-size: large;\">";
 		ArrayList<StoreFront> storeFronts = storeFrontService.GetAllStoreFronts();
 		for(StoreFront store : storeFronts) { //TODO change to regular for loop to get index instead of primary key id
 			body+= "<input type=\"radio\" class=\"storefront\" name=\"store\" value=\""+ store.getId() +"\">\r\n"

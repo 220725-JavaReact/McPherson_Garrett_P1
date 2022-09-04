@@ -7,9 +7,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.revature.rbcGames.Service.LineItemService;
 import com.revature.rbcGames.Service.StoreFrontService;
+import com.revature.rbcGames.models.Customer;
 import com.revature.rbcGames.models.LineItem;
 import com.revature.rbcGames.models.StoreFront;
 import com.revature.rbcGames.util.HtmlFormater;
@@ -19,7 +21,9 @@ public class RestockServlet extends HttpServlet {
 	private static LineItemService lineItemService = new LineItemService();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-		 
+		HttpSession session = req.getSession();
+		Customer customer = (Customer)session.getAttribute("the-user");
+		//redirect if customer is null
 		String body= "<h1>Select new Stock</h1>"
 				+ "<p>Input is additive, use negative number to subtract stock</p><br>"
 				+ "<a href=\"/McPherson_Garrett_P1/Admin\">Admin Options</a><br>"
@@ -41,7 +45,7 @@ public class RestockServlet extends HttpServlet {
 			body+="</ul>";
 		}
 		body += "<input type=\"submit\" value=\"Submit Restock\"></form>";
-		resp.getWriter().write(HtmlFormater.format("Store",body ));
+		resp.getWriter().write(HtmlFormater.format("Store", customer.getUserName(),body ));
 		 
 	}
 	

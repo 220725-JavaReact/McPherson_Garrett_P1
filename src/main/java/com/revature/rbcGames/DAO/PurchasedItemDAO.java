@@ -75,7 +75,7 @@ public class PurchasedItemDAO implements DAO<PurchasedItem> {
 	public ArrayList<PurchasedItem> GetInstanceByOrderId(Order order){
 		ArrayList<PurchasedItem> purchases = new ArrayList<>();
 		try(Connection con = ConnectionFactory.getInstance().getConnection()){
-			String query = "select products.\"name\", products.description, products.price, purchased_items.quantity \r\n"
+			String query = "select products.\"name\", products.description, products.price, purchased_items.quantity, purchased_items.\"cost\"  \r\n"
 					+ "from purchased_items\r\n"
 					+ "join products on products.id = product\r\n"
 					+ "where purchase = ?";
@@ -91,6 +91,7 @@ public class PurchasedItemDAO implements DAO<PurchasedItem> {
 				product.setDescription(rs.getString("description"));
 				product.setPrice(rs.getDouble("price"));
 				purchasedItem.setQuanity(rs.getInt("quantity"));
+				purchasedItem.setItemCost(rs.getDouble("cost"));
 				purchasedItem.setProduct(product);
 				
 				purchases.add(purchasedItem);

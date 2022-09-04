@@ -23,16 +23,25 @@ public class HistoryServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		Customer customer = (Customer)session.getAttribute("the-user");
 		ArrayList<Order> orders = orderService.GetAllOrdersCustomer(customer);
-		String body = "<ul>";
+		String body = "<a href=\"/McPherson_Garrett_P1/Menu\">Return to Menu</a><br><ul>";
 		
 		for(Order order : orders) {
-			
+			body+= "<li>"+ order.getStoreFront().getAddress() + " " + order.getTotalString() + " ";
+			if(order.getReady()) {
+				body+= "is ready for pickup";
+			} else {
+				body+= "is still being processed";
+			}
+			body += "</li><ul>";
 			ArrayList<PurchasedItem> purchasedItems = orderService.GetAllPurchasedItemsOrder(order);
 			for(PurchasedItem item: purchasedItems) {
 				//finish this
+				body+="<li>" + item.getItemCostTotalString() + " " + item.getQuanity() + "x " + item.getProduct().getName() + " " 
+						+ item.getProduct().getDescription() + "</li>";
 			}
+			body+= "</ul>";
 		}
-		resp.getWriter().write(HtmlFormater.format("Register", body));
+		resp.getWriter().write(HtmlFormater.format("Register", customer.getUserName(), body));
 	}
 
 }

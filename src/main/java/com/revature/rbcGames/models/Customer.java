@@ -1,6 +1,7 @@
 package com.revature.rbcGames.models;
 
 import java.util.ArrayList;
+import java.util.Objects;
 ;
 
 /**
@@ -143,6 +144,33 @@ public class Customer {
 		return "Customer [id=" + id + ", name=" + name + ", address=" + address + ", email=" + email + ", userName="
 				+ userName + ", password=" + password + ", isAdmin=" + isAdmin + "]";
 	}
+
+
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(address, email, id, isAdmin, name, password, userName);
+	}
+
+
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		return Objects.equals(address, other.address) && Objects.equals(email, other.email) && id == other.id
+				&& isAdmin == other.isAdmin && Objects.equals(name, other.name) && password == other.password
+				&& Objects.equals(userName, other.userName);
+	}
+	
+	
 
 
 

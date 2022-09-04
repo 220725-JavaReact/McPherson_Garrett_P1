@@ -17,13 +17,14 @@ public class AdminOptionsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		Customer customer = (Customer)session.getAttribute("the-user");
-		String body ="<ul style=\"text-align: left; font-size: large;\">";
+		String body = "<a href=\"/McPherson_Garrett_P1/Menu\">Main Menu</a></li><br>"
+				+"<ul style=\"text-align: left; font-size: large;\">";
 		if(!customer.isAdmin()) {
 			return;
 		}
 		body+= "<li><a href=\"/McPherson_Garrett_P1/Restock\">Restock Items</a></li><br>";
 		
-		body +="<li><a href=\"/McPherson_Garrett_P1/Fullfillment\">Fullfill Orders</a></li><br>";
+		body +="<li><a href=\"/McPherson_Garrett_P1/Fulfill\">Fullfill Orders</a></li><br>";
 		
 		resp.getWriter().write(HtmlFormater.format("Admin Menu", customer.getUserName(), body));
 	}
