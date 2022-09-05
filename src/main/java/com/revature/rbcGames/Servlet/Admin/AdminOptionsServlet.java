@@ -26,6 +26,8 @@ public class AdminOptionsServlet extends HttpServlet {
 		
 		body +="<li><a href=\"/McPherson_Garrett_P1/Fulfill\">Fullfill Orders</a></li><br>";
 		
+		body +="<li><a href=\"/McPherson_Garrett_P1/AdminStore\">Add Products to A Store</a></li><br>";
+		
 		resp.getWriter().write(HtmlFormater.format("Admin Menu", customer.getUserName(), body));
 	}
 	@Override

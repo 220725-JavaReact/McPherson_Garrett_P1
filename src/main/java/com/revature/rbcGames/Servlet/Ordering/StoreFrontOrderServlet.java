@@ -32,7 +32,8 @@ public class StoreFrontOrderServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
 		HttpSession session = req.getSession();
 		StoreFront storeFront = (StoreFront)session.getAttribute("your-store");
-		String body= "<form method=\"post\" action = \"/McPherson_Garrett_P1/Order\" style=\"text-align: left; font-size: large;\">";
+		String body= "<a href=\"/McPherson_Garrett_P1/Menu\">Main Menu</a>"+
+				"<form method=\"post\" action = \"/McPherson_Garrett_P1/Order\" style=\"text-align: left; font-size: large;\">";
 		//get select store from list of store
 		//ArrayList<StoreFront> storeFronts = storeFrontService.GetAllStoreFronts();
 		ArrayList<LineItem> lineItems = lineItemService.GetAllLineItemsFromStoreFront(storeFront);
@@ -76,7 +77,8 @@ public class StoreFrontOrderServlet extends HttpServlet{
 				System.out.println(purchaseItem.toString());
 			}
 		}
-		String body = "<ul style=\"text-align: left; font-size: large;\">";
+		String body = "<a href=\"/McPherson_Garrett_P1/Menu\">Main Menu</a>" +
+		"<ul style=\"text-align: left; font-size: large;\">";
 		for(PurchasedItem item : purchases) {
 			body+= "<li>" + item.getQuanity()+ "x " + item.getItemCostTotalString() + " " + item.getProduct().getName()
 					+" " + item.getProduct().getDescription()+ "</li>";

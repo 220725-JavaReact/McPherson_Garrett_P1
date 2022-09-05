@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.rbcGames.models.Customer;
 import com.revature.rbcGames.models.LineItem;
 import com.revature.rbcGames.models.Order;
@@ -13,6 +16,7 @@ import com.revature.rbcGames.models.StoreFront;
 import com.revature.rbcGames.util.ConnectionFactory;
 
 public class OrderDAO implements DAO<Order> {
+	private static Logger logLogger = LogManager.getLogger(OrderDAO.class.getName());
 
 	@Override
 	public Order AddInstance(Order newInstance) {
@@ -38,16 +42,12 @@ public class OrderDAO implements DAO<Order> {
 			newInstance.setId(rs.getInt("id"));
 			order = newInstance; //hoping this works*/
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method AddInstance: \n" + e.getStackTrace());
 			e.printStackTrace();
 		}
 		return order;
 	}
 
-	/*@Override
-	public Order GetInstanceByID(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 
 	@Override
 	public ArrayList<Order> GetAllInstances() {
@@ -80,6 +80,7 @@ public class OrderDAO implements DAO<Order> {
 				orders.add(order);
 			}
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method GetAllInstances \n" + e.getStackTrace());
 			e.printStackTrace();
 		}
 		return orders;
@@ -112,6 +113,7 @@ public class OrderDAO implements DAO<Order> {
 			}
 			
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method getAllCustomerStoreInstances: \n" + e.getStackTrace());
 			e.printStackTrace();
 		}
 		return orders;
@@ -140,6 +142,7 @@ public class OrderDAO implements DAO<Order> {
 				orders.add(order);
 			}
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method GetAllCustomerInstances: \n" + e.getStackTrace());
 			e.printStackTrace();
 		}
 		return orders;
@@ -172,6 +175,7 @@ public class OrderDAO implements DAO<Order> {
 			pstmt.execute();
 			return instances;
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method UpdateInstance: \n" + e.getStackTrace());
 			e.printStackTrace();
 		}
 		return null;
@@ -179,8 +183,14 @@ public class OrderDAO implements DAO<Order> {
 
 	@Override
 	public boolean RemoveInstance(Order instance) {
-		// TODO Auto-generated method stub
+		logLogger.warn("Method not implemented at RemovedInstance");
 		return false;
+	}
+
+	@Override
+	public ArrayList<Order> AddInstances(ArrayList<Order> newInstances) {
+		logLogger.warn("Method not implemented at method AddInstances (array)");
+		return null;
 	}
 
 }

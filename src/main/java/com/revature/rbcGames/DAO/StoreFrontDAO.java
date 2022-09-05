@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.rbcGames.models.StoreFront;
 import com.revature.rbcGames.util.ConnectionFactory;
 
@@ -14,18 +17,15 @@ import com.revature.rbcGames.util.ConnectionFactory;
  * get instances for StoreFronts and adds them to the temp storage arraylist. NOT TESTED
  */
 public class StoreFrontDAO implements DAO<StoreFront> {
-
+	private static Logger logLogger = LogManager.getLogger(StoreFrontDAO.class.getName());
 	@Override
 	public StoreFront AddInstance(StoreFront newInstance) {
+		logLogger.warn("Method not implemented at method Add instance");
 		//TODO implement
 		return newInstance;
 	}
 	
-	/*@Override
-	public StoreFront GetInstanceByID(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
+
 
 	@Override
 	public ArrayList<StoreFront> GetAllInstances() {
@@ -49,6 +49,7 @@ public class StoreFrontDAO implements DAO<StoreFront> {
 			}
 			return storeFronts;
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method GetAllInstances \n" + e.getStackTrace());
 			e.printStackTrace();
 			
 		}
@@ -58,15 +59,22 @@ public class StoreFrontDAO implements DAO<StoreFront> {
 
 	@Override
 	public StoreFront UpdateInstance(StoreFront instance) {
-		// TODO
+		logLogger.warn("Method not implemented at method UpdateInstance");
 		return null;
 	}
 
 	@Override
 	public boolean RemoveInstance(StoreFront instance) {
 		// TODO Auto-generated method stub
-		
+		logLogger.warn("Method not implemented at RemovedInstance");
 		return false;
+	}
+
+	@Override
+	public ArrayList<StoreFront> AddInstances(ArrayList<StoreFront> newInstances) {
+		// TODO Auto-generated method stub
+		logLogger.warn("Method not implemented at method AddInstances (array)");
+		return null;
 	}
 
 

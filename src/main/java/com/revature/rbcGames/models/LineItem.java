@@ -67,9 +67,12 @@ public class LineItem {
 
 
 
+
+
 	@Override
 	public String toString() {
-		return "LineItem [product=" + product + ", quantity=" + quantity + ", storeFront=" + storeFront.getName() + "]";
+		return "LineItem [id=" + id + ", product=" + product + ", quantity=" + quantity + ", storeFront=" + storeFront
+				+ "]";
 	}
 
 	@Override

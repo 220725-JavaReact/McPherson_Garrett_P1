@@ -115,4 +115,6 @@ public class LineItemServiceTest {
 		
 		Assertions.assertEquals(actual, lineItems1);
 	}
+	
+	// add updateLineItemFromOrder test
 }

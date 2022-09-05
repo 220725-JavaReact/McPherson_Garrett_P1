@@ -7,12 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.rbcGames.models.Customer;
 import com.revature.rbcGames.util.ConnectionFactory;
 
 
 public class CustomerDAO implements DAO<Customer>{
-
+	private static Logger logLogger = LogManager.getLogger(CustomerDAO.class.getName());
 	@Override
 	public Customer AddInstance(Customer newInstance) {
 		// TODO Auto-generated method stub
@@ -29,42 +32,14 @@ public class CustomerDAO implements DAO<Customer>{
 			pstmt.execute();
 			customer = newInstance;
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method AddInstance: \n" + e.getStackTrace());
 			e.printStackTrace();
 			
 			return customer;
 		}
 		return customer;
 	}
-	/*@Override
-	public Customer GetInstanceByID(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 
-	/*public Customer GetInstanceByLogin(Customer newInstance) {
-		Customer customer = null;
-		try(Connection con = ConnectionFactory.getInstance().getConnection()){
-			String query = "select * from customers\r\n"
-					+ "where username = ? and password = ?";
-			PreparedStatement pstmt = con.prepareStatement(query);
-			pstmt.setString(1, newInstance.getUserName());
-			pstmt.setInt(2, newInstance.getPassword());
-			
-			ResultSet rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-			int id = rs.getInt(1);
-			String name = rs.getString(2);
-			String address = rs.getString(3);
-			String email = rs.getString(4);
-			Boolean admin = rs.getBoolean(7);
-			customer = new Customer(id, name, address, email, admin);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return customer;
-	}*/
 	@Override
 	public ArrayList<Customer> GetAllInstances() {
 		ArrayList<Customer> customers = new ArrayList<>();
@@ -87,6 +62,7 @@ public class CustomerDAO implements DAO<Customer>{
 				customers.add(customer);
 			}
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method GetAllInstances \n" + e.getStackTrace());
 			e.printStackTrace();
 		}
 		return customers;
@@ -112,8 +88,8 @@ public class CustomerDAO implements DAO<Customer>{
 			customer = instance;
 			
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method UpdateInstance: \n" + e.getStackTrace());
 			e.printStackTrace();
-			return customer;
 		}
 		
 		return customer;
@@ -121,8 +97,16 @@ public class CustomerDAO implements DAO<Customer>{
 
 	@Override
 	public boolean RemoveInstance(Customer instance) {
+		logLogger.warn("Method not implemented at RemovedInstance");
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public ArrayList<Customer> AddInstances(ArrayList<Customer> newInstances) {
+		logLogger.warn("Method not implemented at method AddInstances (array)");
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

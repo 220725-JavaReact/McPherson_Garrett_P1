@@ -28,6 +28,7 @@ public class CustomerService {
 	}
 	
 	public Customer AddCustomer(Customer customer, String password) {
+		logLogger.info(customer.getUserName() + " being added to the db");
 		customer.setPassword(setToHash(password));
 		Customer c = customerDAO.AddInstance(customer);
 		if(customers != null) {
@@ -48,20 +49,20 @@ public class CustomerService {
 	}
 	
 	public Customer GetCustomerByLogin(Customer customer, String password) {
+		logLogger.info(customer.getUserName() + " is trying to log in");
 		customer.setPassword(setToHash(password));
-
 		ArrayList<Customer> customers = GetAllCustomers();
 
 		for(Customer c : customers) {
 			if(c.getUserName().equals(customer.getUserName())) {
 				
 				if(c.getPassword() == customer.getPassword()) {
-					System.out.println(c.toString());
+					logLogger.info(customer.getUserName()+" name match, and password match");
 					
 					return c;
 				}
 
-				logLogger.error("User name match, but password missmatch");
+				logLogger.error(customer.getUserName()+" name match, but password missmatch");
 						
 				break;
 			}
@@ -70,6 +71,7 @@ public class CustomerService {
 	}
 	
 	public Customer UpdateCustomer(Customer customer, String password) {
+		logLogger.info(customer.getUserName()+" is updating their personal info");
 		if(!password.equals("")) {
 			customer.setPassword(setToHash(password));
 		}

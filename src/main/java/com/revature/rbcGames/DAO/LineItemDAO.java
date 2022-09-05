@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.rbcGames.models.LineItem;
 import com.revature.rbcGames.models.Product;
 import com.revature.rbcGames.models.StoreFront;
@@ -16,18 +19,43 @@ import com.revature.rbcGames.util.ConnectionFactory;
  * lime items is special compared to other dao as it get methods include the product as well
  */
 public class LineItemDAO implements DAO<LineItem> {
-
+	private static Logger logLogger = LogManager.getLogger(LineItemDAO.class.getName());
 	@Override
-	public LineItem AddInstance(LineItem newInstance) { //used by admins
-		// TODO Auto-generated method stub
+	public LineItem AddInstance(LineItem newInstance) {
+		logLogger.warn("Method not implemented at AddInstnace");
 		return null;
 	}
-
-	/*@Override
-	public LineItem GetInstanceByID(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
+	
+	@Override
+	public ArrayList<LineItem> AddInstances(ArrayList<LineItem> newInstances){
+		ArrayList<LineItem> lineItems = null;
+		try (Connection con = ConnectionFactory.getInstance().getConnection()){
+			String query = "insert into line_items (product, store, quantity)\r\n"
+					+ "values";
+			for(int i = 0; i< newInstances.size(); i++) {
+				query += "(?,?,?)";
+				if(i < newInstances.size()-1) {
+					query += ",\r\n";
+				}
+			}
+			
+			PreparedStatement pstmt = con.prepareStatement(query);
+			
+			for(int i=0; i< newInstances.size(); i++) {
+				pstmt.setInt(i*3+1,newInstances.get(i).getProduct().getId());
+				pstmt.setInt(i*3+2, newInstances.get(i).getStoreFront().getId());
+				pstmt.setInt(i*3+3, newInstances.get(i).getQuantity());
+			}
+			pstmt.execute();
+			lineItems = newInstances;
+		}
+		catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method AddInstances (array): \n" + e.getStackTrace());
+			e.printStackTrace();
+		}
+		return lineItems;
+		
+	}
 
 	@Override
 	public ArrayList<LineItem> GetAllInstances() { //should only be used by admins
@@ -66,6 +94,7 @@ public class LineItemDAO implements DAO<LineItem> {
 			}
 			
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method GetAllInstances \n" + e.getStackTrace());
 			e.printStackTrace();
 		}
 		
@@ -106,6 +135,7 @@ public class LineItemDAO implements DAO<LineItem> {
 			return allItems;
 			
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method GetAllInstanceFromStoreFront: \n" + e.getStackTrace());
 			e.printStackTrace();
 		}
 		return null;
@@ -120,6 +150,7 @@ public class LineItemDAO implements DAO<LineItem> {
 					+ "where id=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method UpdateInstance: \n" + e.getStackTrace());
 			e.printStackTrace();
 		}
 		
@@ -155,7 +186,7 @@ public class LineItemDAO implements DAO<LineItem> {
 
 	@Override
 	public boolean RemoveInstance(LineItem instance) {
-		// TODO Auto-generated method stub
+		logLogger.warn("Method not implemented at RemovedInstance");
 		return false;
 	}
 

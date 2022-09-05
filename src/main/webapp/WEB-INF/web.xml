@@ -107,4 +107,20 @@
     <servlet-name>History</servlet-name>
     <url-pattern>/History</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminStore</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Admin.StoreAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminStore</servlet-name>
+    <url-pattern>/AdminStore</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LineItemAdmin</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Admin.LineItemAdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LineItemAdmin</servlet-name>
+    <url-pattern>/ItemAdmin</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -7,13 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.rbcGames.models.Order;
 import com.revature.rbcGames.models.Product;
 import com.revature.rbcGames.models.PurchasedItem;
 import com.revature.rbcGames.util.ConnectionFactory;
 
 public class PurchasedItemDAO implements DAO<PurchasedItem> {
-
+	private static Logger logLogger = LogManager.getLogger(PurchasedItemDAO.class.getName());
 	@Override
 	public PurchasedItem AddInstance(PurchasedItem newInstance) {
 		// TODO Auto-generated method stub
@@ -30,6 +33,7 @@ public class PurchasedItemDAO implements DAO<PurchasedItem> {
 			
 			purchasedItem = newInstance;
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method AddInstance: \n" + e.getStackTrace());
 			e.printStackTrace();
 		}
 		return purchasedItem;
@@ -61,16 +65,12 @@ public class PurchasedItemDAO implements DAO<PurchasedItem> {
 			return purchase;
 					
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method AddInstances (array): \n" + e.getStackTrace());
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	/*@Override
-	public PurchasedItems GetInstanceByID(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 	
 	public ArrayList<PurchasedItem> GetInstanceByOrderId(Order order){
 		ArrayList<PurchasedItem> purchases = new ArrayList<>();
@@ -97,6 +97,7 @@ public class PurchasedItemDAO implements DAO<PurchasedItem> {
 				purchases.add(purchasedItem);
 			}
 		} catch (SQLException e) {
+			logLogger.warn("Failed read/write database at method GetInstnaceByOrder: \n" + e.getStackTrace());
 			e.printStackTrace();
 		}
 		return purchases;
@@ -106,20 +107,29 @@ public class PurchasedItemDAO implements DAO<PurchasedItem> {
 
 	@Override
 	public ArrayList<PurchasedItem> GetAllInstances() {
-		// TODO Auto-generated method stub
+		logLogger.warn("Method not implemented at GetAllInstances");
 		return null;
 	}
 
 	@Override
 	public PurchasedItem UpdateInstance(PurchasedItem instance) {
+		logLogger.warn("Method not implemented at UpdatedInstnace");
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean RemoveInstance(PurchasedItem instance) {
-		// TODO Auto-generated method stub
+		logLogger.warn("Method not implemented at RemovedInstance");
+
 		return false;
+	}
+
+	@Override
+	public ArrayList<PurchasedItem> AddInstances(ArrayList<PurchasedItem> newInstances) {
+		logLogger.warn("Method not implemented at method AddInstances (array)");
+
+		return null;
 	}
 
 }

@@ -93,4 +93,37 @@ public class OrderServiceTest {
 		
 		Assertions.assertEquals(expected, actual);
 	}
+	
+	//get allOrders customer
+	
+	@Test
+	public void GetAllOrdersCustomer_pass() {
+		Customer customer1 = new Customer();
+		customer1.setId(1);
+		Customer customer2 = new Customer();
+		customer2.setId(2);
+		StoreFront storeFront = new StoreFront();
+		Order order1 = new Order();
+		order1.addTotal(35.0);
+		order1.setId(0);
+		order1.setReady(false);
+		order1.setCustomer(customer1);
+		order1.setStoreFront(storeFront);
+		Order order2 = new Order();
+		order2.addTotal(100.0);
+		order2.setId(1);
+		order2.setReady(true);
+		order2.setCustomer(customer2);
+		order2.setStoreFront(storeFront);
+		
+		ArrayList<Order> orders1 = new ArrayList<>(Arrays.asList(order1,order2));
+		ArrayList<Order> expected = new ArrayList<>(Arrays.asList(order1));
+		when(mockOrderDAO.GetAllInstances()).thenReturn(orders1);
+		
+		ArrayList<Order> actual = orderService.GetAllOrdersCustomer(customer1);
+		
+		Assertions.assertEquals(expected, actual);
+	}
+	
+	// not going to test the last 2 because they literally just would return the mock value.
 }

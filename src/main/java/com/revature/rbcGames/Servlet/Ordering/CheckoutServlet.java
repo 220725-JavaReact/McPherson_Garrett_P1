@@ -10,12 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.revature.rbcGames.Service.LineItemService;
 import com.revature.rbcGames.Service.OrderService;
 import com.revature.rbcGames.models.PurchasedItem;
 import com.revature.rbcGames.util.HtmlFormater;
 
 public class CheckoutServlet extends HttpServlet {
 	private static OrderService orderService = new OrderService();
+	private static LineItemService lineItemService = new LineItemService();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException{
 		String body = "Thank you";
@@ -31,9 +33,10 @@ public class CheckoutServlet extends HttpServlet {
 			//display there is nothing to display and go back.
 			return;
 		}
-		System.out.println("Items"+purchasedItems.toString());
+		purchasedItems = lineItemService.UpdateLineItemFromOrder(purchasedItems);
 		purchasedItems = orderService.AddAnOrder(purchasedItems);
-		String body = "<h1>Thank you for your purchase</h1>\r\n"
+		String body = "<a href=\"/McPherson_Garrett_P1/Menu\">Main Menu</a>"+ 
+				"<h1>Thank you for your purchase</h1>\r\n"
 				+ "        <p>Check back to see the status of your order</p>\r\n"
 				+ "        <div>\r\n"
 				+ "            <p>Ordered from: " + purchasedItems.get(0).getOrder().getStoreFront().getAddress() + " "
