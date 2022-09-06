@@ -23,7 +23,9 @@ public class RestockServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		HttpSession session = req.getSession();
 		Customer customer = (Customer)session.getAttribute("the-user");
-		//redirect if customer is null
+		if(!customer.isAdmin()) {
+			resp.sendRedirect("/McPherson_Garrett_P1/Redirect");
+		}
 		String body= "<h1>Select new Stock</h1>"
 				+ "<p>Input is additive, use negative number to subtract stock</p><br>"
 				+ "<a href=\"/McPherson_Garrett_P1/Admin\">Admin Options</a><br>"
@@ -52,6 +54,11 @@ public class RestockServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		
+		HttpSession session = req.getSession();
+		Customer customer = (Customer)session.getAttribute("the-user");
+		if(!customer.isAdmin()) {
+			resp.sendRedirect("/McPherson_Garrett_P1/Redirect");
+		}
 		ArrayList<LineItem> lineItems = lineItemService.GetAllLineItemsAll();
 		ArrayList<LineItem> updatedItems = new ArrayList<>();
 		int i = 0;

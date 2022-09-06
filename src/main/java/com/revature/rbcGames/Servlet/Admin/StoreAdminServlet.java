@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.revature.rbcGames.Service.StoreFrontService;
+import com.revature.rbcGames.models.Customer;
 import com.revature.rbcGames.models.StoreFront;
 import com.revature.rbcGames.util.HtmlFormater;
 
@@ -17,6 +18,11 @@ public class StoreAdminServlet extends HttpServlet{
 	private static StoreFrontService storeFrontService = new StoreFrontService();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		HttpSession session = req.getSession();
+		Customer customer = (Customer)session.getAttribute("the-user");
+		if(!customer.isAdmin()) {
+			resp.sendRedirect("/McPherson_Garrett_P1/Redirect");
+		}
 		String body= "<a href=\"/McPherson_Garrett_P1/Admin\">Admin Menu</a></li><br>" +
 				"<form method=\"post\" action = \"/McPherson_Garrett_P1/AdminStore\" style=\"text-align: left; font-size: large;\">";
 		ArrayList<StoreFront> storeFronts = storeFrontService.GetAllStoreFronts();
@@ -31,9 +37,13 @@ public class StoreAdminServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+		
 		String radio = req.getParameter("store");
-		System.out.println("Radio choice " + radio);
 		HttpSession session = req.getSession();
+		Customer customer = (Customer)session.getAttribute("the-user");
+		if(!customer.isAdmin()) {
+			resp.sendRedirect("/McPherson_Garrett_P1/Redirect");
+		}
 		StoreFront storeFront = storeFrontService.GetAStoreFront(radio);
 		session.setAttribute("your-store", storeFront);
 		resp.sendRedirect("/McPherson_Garrett_P1/ItemAdmin");

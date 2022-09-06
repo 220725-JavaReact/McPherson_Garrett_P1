@@ -17,6 +17,10 @@ public class AdminOptionsServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		Customer customer = (Customer)session.getAttribute("the-user");
+
+		if(!customer.isAdmin()) {
+			resp.sendRedirect("/McPherson_Garrett_P1/Redirect");
+		}
 		String body = "<a href=\"/McPherson_Garrett_P1/Menu\">Main Menu</a></li><br>"
 				+"<ul style=\"text-align: left; font-size: large;\">";
 		if(!customer.isAdmin()) {
@@ -27,6 +31,8 @@ public class AdminOptionsServlet extends HttpServlet {
 		body +="<li><a href=\"/McPherson_Garrett_P1/Fulfill\">Fullfill Orders</a></li><br>";
 		
 		body +="<li><a href=\"/McPherson_Garrett_P1/AdminStore\">Add Products to A Store</a></li><br>";
+		
+		body +="<li><a href=\"/McPherson_Garrett_P1/ProductAdmin\">Add Products to company listing</a></li><br>";
 		
 		resp.getWriter().write(HtmlFormater.format("Admin Menu", customer.getUserName(), body));
 	}

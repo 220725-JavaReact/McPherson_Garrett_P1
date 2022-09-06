@@ -19,7 +19,7 @@ public class MainMenuServlet extends HttpServlet {
 		//check if customer session is saved, redirect if not
 		
 		/*options: 
-		 * 1. check if customer is admind, display admin options redirect link
+		 * 1. check if customer is admin, display admin options redirect link
 		 * 2. Option for customer to begin a purchase, go to storefront servlet
 		 * 3. Option for customer to update their own options
 		*/

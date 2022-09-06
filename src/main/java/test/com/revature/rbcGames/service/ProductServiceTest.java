@@ -76,4 +76,47 @@ public class ProductServiceTest {
 
 		Assertions.assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void AddProduct_Pass(){
+		Product product1 = new Product();
+		product1.setId(0);
+		product1.setName("Crash");
+		product1.setPrice(15);
+		
+		when(mockProductDAO.AddInstance(product1)).thenReturn(product1);
+		
+		Product actual = productService.AddProduct(product1);
+		
+		Assertions.assertEquals(product1, actual);
+		
+	}
+	
+	@Test
+	public void AddProduct_Fail() {
+		Product product1 = new Product();
+		product1.setId(0);
+		product1.setName("Crash");
+		product1.setPrice(0);
+		
+		when(mockProductDAO.AddInstance(product1)).thenReturn(product1);
+		
+		Product actual = productService.AddProduct(product1);
+		
+		Assertions.assertNotEquals(product1, actual);
+	}
+	
+	@Test
+	public void AddProduct_Null() {
+		Product product1 = new Product();
+		product1.setId(0);
+		product1.setName("Crash");
+		product1.setPrice(0);
+		
+		when(mockProductDAO.AddInstance(product1)).thenReturn(product1);
+		
+		Product actual = productService.AddProduct(product1);
+		
+		Assertions.assertEquals(null, actual);
+	}
 }

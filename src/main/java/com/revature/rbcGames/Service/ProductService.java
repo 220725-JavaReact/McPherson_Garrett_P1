@@ -30,6 +30,18 @@ public class ProductService {
 		ProductService.products = products;
 	}
 	
+	public Product AddProduct(Product product) {
+		logLogger.info("Adding product " + product.getName() +" to the db");
+		if(product.getPrice() > 0 || !(product.getName() == "") || !(product.getDescription() == "")) {
+			Product newProduct = productDAO.AddInstance(product);
+			return newProduct;
+		} else {
+			logLogger.warn("The price cannot be less than 0");
+		}
+		return null;
+		
+	}
+	
 	public ArrayList<Product> GetAllProducts(){
 		
 		if(products == null) {

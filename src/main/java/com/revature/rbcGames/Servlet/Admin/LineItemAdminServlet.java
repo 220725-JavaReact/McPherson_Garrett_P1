@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.revature.rbcGames.Service.LineItemService;
 import com.revature.rbcGames.Service.ProductService;
+import com.revature.rbcGames.models.Customer;
 import com.revature.rbcGames.models.LineItem;
 import com.revature.rbcGames.models.Product;
 import com.revature.rbcGames.models.StoreFront;
@@ -23,10 +24,14 @@ public class LineItemAdminServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		HttpSession session = req.getSession();
+		Customer customer = (Customer)session.getAttribute("the-user");
+		if(!customer.isAdmin()) {
+			resp.sendRedirect("/McPherson_Garrett_P1/Redirect");
+		}
 		StoreFront storeFront = (StoreFront)session.getAttribute("your-store");
 		ArrayList<Product> products = productService.GetStoreUnlistedProducts(storeFront);
 		session.setAttribute("add-products", products);
-		String body= "<a href=\"/McPherson_Garrett_P1/Admin\">Admin Menu</a></li><br>" 
+		String body= "<a href=\"/McPherson_Garrett_P1/Admin\">Admin Menu</a><br>" 
 				+"<form method=\"post\" action = \"/McPherson_Garrett_P1/ItemAdmin\" style=\"text-align: left; font-size: large;\">";
 
 
@@ -41,6 +46,10 @@ public class LineItemAdminServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		HttpSession session = req.getSession();
+		Customer customer = (Customer)session.getAttribute("the-user");
+		if(!customer.isAdmin()) {
+			resp.sendRedirect("/McPherson_Garrett_P1/Redirect");
+		}
 		StoreFront storeFront = (StoreFront)session.getAttribute("your-store");
 		ArrayList<Product> products = (ArrayList<Product>)session.getAttribute("add-products");
 		ArrayList<LineItem> lineItems = new ArrayList<>();

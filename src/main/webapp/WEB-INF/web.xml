@@ -123,4 +123,21 @@
     <servlet-name>LineItemAdmin</servlet-name>
     <url-pattern>/ItemAdmin</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>NewProductAdmin</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Admin.NewProductServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewProductAdmin</servlet-name>
+    <url-pattern>/ProductAdmin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Redirect</servlet-name>
+    <servlet-class>com.revature.rbcGames.Servlet.Menus.RedirectServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Redirect</servlet-name>
+    <url-pattern>/Redirect</url-pattern>
+  </servlet-mapping>
 </web-app>
